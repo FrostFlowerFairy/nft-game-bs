@@ -26,6 +26,15 @@ contract NFTGame is ERC721{
         uint attackDamage;
     }
 
+    struct BigBoss {
+      string name;
+      string imageURI;
+      uint hp;
+      uint maxHp;
+      uint attackDamage;
+    }
+
+    BigBoss public bigBoss;
 
     // The tokenId is the NFTs unique identifier, it's just a number that goes
   // 0, 1, 2, 3, etc.
@@ -48,8 +57,23 @@ contract NFTGame is ERC721{
     string[] memory characterNames,
     string[] memory characterImageURIs,
     uint[] memory characterHp,
-    uint[] memory characterAttackDmg
+    uint[] memory characterAttackDmg,
+    string memory bossName,
+    string memory bossImageURI,
+    uint bossHp, 
+    uint bossAttackDamage
   ) ERC721("SuperHeroes", "SHero") {
+
+    // Initialize the boss. Save it to our global "bigBoss" state variable.
+  bigBoss = BigBoss({
+    name: bossName,
+    imageURI: bossImageURI,
+    hp: bossHp,
+    maxHp: bossHp,
+    attackDamage: bossAttackDamage
+  });
+
+  console.log("Done initializing boss %s w/ HP %s, img %s", bigBoss.name, bigBoss.hp, bigBoss.imageURI);
     
      // Loop through all the characters, and save their values in our contract so
     // we can use them later when we mint our NFTs.

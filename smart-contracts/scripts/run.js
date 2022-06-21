@@ -6,7 +6,11 @@ const main = async () => {
             "https://i.imgur.com/NBEIFBz.png",
             "https://i.imgur.com/5gAuNtn.png"],
         [400, 300, 500],                    // HP values
-        [300, 500, 2500]                       // Attack damage values
+        [300, 500, 2500],
+        "Omni Man", // Boss name
+        "https://i.imgur.com/Y7Xlmux.jpeg", // Boss image
+        1000, // Boss hp
+        150 // Bo                       // Attack damage values
     );
     await gameContract.deployed();
     console.log("Contract deployed to:", gameContract.address);
