@@ -162,17 +162,45 @@ contract NFTGame is ERC721{
       CharacterAttributes storage player = nftHolderAttributes[nftTokenIdOfPlayer];
       // I use the keyword storage here as well which will be more important a bit later. Basically, when we do storage and then do player.hp = 0 then it would change the health value on the NFT itself to 0.
       // In contrast, if we were to use memory instead of storage it would create a local copy of the variable within the scope of the function. That means if we did player.hp = 0 it would only be that way within the function and wouldn't change the global value.
-      
-      console.log("\nPlayer w/ character %s about to attack. Has %s HP and %s AD", player.name, player.hp, player.attackDamage);
-      console.log("Boss %s has %s HP and %s AD", bigBoss.name, bigBoss.hp, bigBoss.attackDamage);
       // Make sure the player has more than 0 HP.
       require(player.hp > 0, "Player doesn't have any HP");
       // Make sure the boss has more than 0 HP.
       require(bigBoss.hp > 0, "BigBoss doesn't have any HP");
+
+      console.log("\nPlayer w/ character %s about to attack. Has %s HP and %s AD", player.name, player.hp, player.attackDamage);
+      console.log("Boss %s has %s HP and %s AD", bigBoss.name, bigBoss.hp, bigBoss.attackDamage);
+
       // Allow player to attack boss.
+      if (bigBoss.hp < player.attackDamage) {
+        bigBoss.hp = 0;
+      } else {
+        bigBoss.hp = bigBoss.hp - player.attackDamage;
+      }
+       // Console for ease.
+      console.log("Player attacked boss. New boss hp: %s", bigBoss.hp);
+
 
       // Allow boss to attack player.
+        if(bigBoss.hp == 0) {
+          console.log("Bigboss is dead. hp: %s", bigBoss.hp);
+        }
+        else {
+          if (player.hp < bigBoss.attackDamage) {
+            player.hp = 0;
+          } else {
+            player.hp = player.hp - bigBoss.attackDamage;
+          }
+          console.log("Boss attacked player. New player hp: %s\n", player.hp);
+        }
     } 
+
+    function getAllDefaultCharacters() public view returns (CharacterAttributes[] memory) {
+      return defaultCharacters;
+    }
+
+    function getBigBoss() public view returns (BigBoss memory) {
+      return bigBoss;
+    }
 
 
 
