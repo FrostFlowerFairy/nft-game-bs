@@ -53,6 +53,11 @@ contract NFTGame is ERC721{
     // ADDRESS => TokenId, to store the owner of the NFT and reference it later.
     mapping(address => uint256) public nftHolders;
 
+  event CharacterNFTMinted(address sender, uint256 tokenId, uint256 characterIndex);
+  event AttackComplete(address sender, uint newBossHp, uint newPlayerHp);
+
+
+
   constructor(
     string[] memory characterNames,
     string[] memory characterImageURIs,
@@ -126,6 +131,7 @@ contract NFTGame is ERC721{
 
         // Increment the tokenId for the next person that uses it.
         _tokenIds.increment();
+        emit CharacterNFTMinted(msg.sender, newItemId, _characterIndex);
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
@@ -192,6 +198,8 @@ contract NFTGame is ERC721{
           }
           console.log("Boss attacked player. New player hp: %s\n", player.hp);
         }
+
+      emit AttackComplete(msg.sender, bigBoss.hp, player.hp);
     } 
 
     function getAllDefaultCharacters() public view returns (CharacterAttributes[] memory) {
