@@ -155,6 +155,25 @@ contract NFTGame is ERC721{
         return output;
     }
 
+    function attackBoss() public {
+      uint256 nftTokenIdOfPlayer = nftHolders[msg.sender];
+      require(nftTokenIdOfPlayer != 0, "Player NFT not found");
+      // Get the state of the player's NFT.
+      CharacterAttributes storage player = nftHolderAttributes[nftTokenIdOfPlayer];
+      // I use the keyword storage here as well which will be more important a bit later. Basically, when we do storage and then do player.hp = 0 then it would change the health value on the NFT itself to 0.
+      // In contrast, if we were to use memory instead of storage it would create a local copy of the variable within the scope of the function. That means if we did player.hp = 0 it would only be that way within the function and wouldn't change the global value.
+      
+      console.log("\nPlayer w/ character %s about to attack. Has %s HP and %s AD", player.name, player.hp, player.attackDamage);
+      console.log("Boss %s has %s HP and %s AD", bigBoss.name, bigBoss.hp, bigBoss.attackDamage);
+      // Make sure the player has more than 0 HP.
+      require(player.hp > 0, "Player doesn't have any HP");
+      // Make sure the boss has more than 0 HP.
+      require(bigBoss.hp > 0, "BigBoss doesn't have any HP");
+      // Allow player to attack boss.
+
+      // Allow boss to attack player.
+    } 
+
 
 
 }
