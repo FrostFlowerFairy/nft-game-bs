@@ -210,6 +210,19 @@ contract NFTGame is ERC721{
       return bigBoss;
     }
 
+    function checkIfUserHasNFT() public view returns (CharacterAttributes memory) {
+      // Get the tokenId of the user's character NFT
+      uint256 userNftTokenId = nftHolders[msg.sender];
+      // If the user has a tokenId in the map, return their character.
+      if (userNftTokenId > 0) {
+        return nftHolderAttributes[userNftTokenId];
+      }
+      // Else, return an empty character.
+      else {
+        CharacterAttributes memory emptyStruct;
+        return emptyStruct;
+      }
+    }
 
 
 }

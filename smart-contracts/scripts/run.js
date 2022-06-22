@@ -25,11 +25,10 @@ const main = async () => {
     // console.log("Token URI:", returnedTokenUri);
 
 
-    txn = await gameContract.attackBoss();
+    txn = await gameContract.checkIfUserHasNFT();
     await txn.wait();
 
-    txn = await gameContract.attackBoss();
-    await txn.wait();
+    console.log(`Does user have NFT>> ${txn.}`)
 
 };
 
