@@ -49,6 +49,8 @@
 .connectWalletContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
   max-width: 550px;
 }
@@ -92,6 +94,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 50vh;
   padding-bottom: 30px;
 }
 
