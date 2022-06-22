@@ -26,9 +26,9 @@ const main = async () => {
 
 
     txn = await gameContract.checkIfUserHasNFT();
-    await txn.wait();
+    // await txn.wait();
 
-    console.log(`Does user have NFT>> ${txn.}`)
+    console.log(`Does user have NFT>> ${txn.name}`)
 
 };
 

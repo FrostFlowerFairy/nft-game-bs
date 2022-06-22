@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect, useRef } from 'react'
-import { TWITTER_LINK, TWITTER_LINK_ZEE, TWITTER_HANDLE_ZEE, TWITTER_HANDLE, CONTRACT_ADDRESS, CONTRACT_ABI } from '../constants'
+import { TWITTER_LINK, TWITTER_LINK_ZEE, TWITTER_HANDLE_ZEE, TWITTER_HANDLE, CONTRACT_ADDRESS, CONTRACT_ABI, transformCharacterData } from '../constants'
 import { providers, Contract, utils } from "ethers";
 import Web3Modal from "web3modal";
 import LoadingIndicator from '../components/LoadingIndicator/'
@@ -63,10 +63,10 @@ export default function Home() {
       // Get the provider from web3Modal, which in our case is MetaMask
       // When used for the first time, it prompts the user to connect their wallet
       const provider = await getProviderOrSigner(true);
-      setWalletConnected(true);
       const address = await provider.getAddress();
       console.log(address)
       setCurrentAccount(address)
+      setWalletConnected(true);
 
     } catch (err) {
       console.error(err);
@@ -183,8 +183,8 @@ export default function Home() {
               src="https://media3.giphy.com/media/JTjiT1dvFdSpi/giphy.gif"
               alt="DBZ Anime Team"
             />
-            {renderConnectionContainer()}
           </div>
+          {renderConnectionContainer()}
         </div>
 
       </main>
