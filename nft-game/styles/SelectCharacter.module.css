@@ -63,4 +63,26 @@
     font-weight: bold;
     font-size: 16px;
   }
+
+  .selectCharacterContainer .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 75px;
+  }
+  
+  .selectCharacterContainer .loading .indicator {
+    display: flex;
+  }
+  
+  .selectCharacterContainer .loading .indicator p {
+    font-weight: bold;
+    font-size: 28px;
+    padding-left: 5px;
+  }
+  
+  .selectCharacterContainer .loading img {
+    width: 450px;
+    padding-top: 25px;
+  }
   

@@ -3,10 +3,14 @@ import { useState, useEffect, useRef } from 'react'
 import { CONTRACT_ADDRESS, CONTRACT_ABI, transformCharacterData } from '../../constants'
 import { providers, Contract, utils } from "ethers";
 import styles from '../../styles/SelectCharacter.module.css'
+import LoadingIndicator from '../../components/LoadingIndicator/'
+
 
 const SelectCharacter = ({ setCharacterNFT }) => {
     const [characters, setCharacters] = useState([]);
     const [gameContract, setGameContract] = useState(null);
+
+    const [mintingCharacter, setMintingCharacter] = useState(false);
 
 
     useEffect(() => {
@@ -99,13 +103,18 @@ const SelectCharacter = ({ setCharacterNFT }) => {
     const mintCharacterNFTAction = async (characterId) => {
         try {
             if (gameContract) {
+                setMintingCharacter(true);
                 console.log('Minting character in progress...');
                 const mintTxn = await gameContract.mintCharacterNFT(characterId);
                 await mintTxn.wait();
                 console.log('mintTxn:', mintTxn);
+
+                setMintingCharacter(false);
             }
         } catch (error) {
             console.warn('MintCharacterAction Error:', error);
+
+            setMintingCharacter(false);
         }
     };
 
@@ -134,6 +143,19 @@ const SelectCharacter = ({ setCharacterNFT }) => {
             {characters.length > 0 && (
                 <div className={styles.characterGrid}>
                     {renderCharacters()}
+                </div>
+            )}
+            {/* Only show our loading state if mintingCharacter is true */}
+            {mintingCharacter && (
+                <div className={styles.loading}>
+                    <div className={styles.indicator}>
+                        <LoadingIndicator />
+                        <p>Minting In Progress...</p>
+                    </div>
+                    <img
+                        src="https://media2.giphy.com/media/61tYloUgq1eOk/giphy.gif?cid=ecf05e47dg95zbpabxhmhaksvoy8h526f96k4em0ndvx078s&rid=giphy.gif&ct=g"
+                        alt="Minting loading indicator"
+                    />
                 </div>
             )}
         </div>

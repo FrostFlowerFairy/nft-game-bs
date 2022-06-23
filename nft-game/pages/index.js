@@ -77,6 +77,7 @@ export default function Home() {
   // The array at the end of function call represents what state changes will trigger this effect
   // In this case, whenever the value of `walletConnected` changes - this effect will be called
   useEffect(() => {
+    setLoading(true);
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
     if (!walletConnected) {
       // Assign the Web3Modal class to the reference object by setting it's `current` value
@@ -116,6 +117,10 @@ export default function Home() {
       } else {
         console.log('No character NFT found');
       }
+      /*
+     * Once we are done with all the fetching, set loading state to false
+     */
+      setLoading(false);
     };
 
     /*
@@ -128,14 +133,14 @@ export default function Home() {
   }, [walletConnected]);
 
   const renderConnectionContainer = () => {
-    if (walletConnected) {
 
+
+    if (walletConnected) {
       if (loading) {
         return (
           <LoadingIndicator />
         );
       }
-
       // Senario #2
       if (currentAccount && !characterNFT) {
         return (
@@ -146,8 +151,9 @@ export default function Home() {
             <SelectCharacter setCharacterNFT={setCharacterNFT} />;
           </div>
         )
-      } else {
-
+      } else if (currentAccount && characterNFT) {
+        // Senario #3 - If user has connected to the app AND does have a character NFT - Show Arena Component
+        return <Arena characterNFT={characterNFT} setCharacterNFT={setCharacterNFT} />;
       }
 
     } else {
@@ -162,7 +168,7 @@ export default function Home() {
 
 
 
-
+  console.log(`Char NFT >> ${characterNFT}`)
 
 
   return (
@@ -177,13 +183,15 @@ export default function Home() {
         <div className={styles.headerContainer}>
           <p className={`${styles.header} ${styles.gradientText}`}>⚔️ Metaverse Anime Slayer ⚔️</p>
           <p className={styles.subText}>Team up to protect the Anime Metaverse!</p>
-          <div className={styles.connectWalletContainer}>
+
+
+          {!characterNFT && <div className={styles.connectWalletContainer}>
             <img
               width={walletConnected ? 300 : ''}
               src="https://media3.giphy.com/media/JTjiT1dvFdSpi/giphy.gif"
               alt="DBZ Anime Team"
             />
-          </div>
+          </div>}
           {renderConnectionContainer()}
         </div>
 
