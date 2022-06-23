@@ -153,7 +153,7 @@ export default function Home() {
         )
       } else if (currentAccount && characterNFT) {
         // Senario #3 - If user has connected to the app AND does have a character NFT - Show Arena Component
-        return <Arena characterNFT={characterNFT} setCharacterNFT={setCharacterNFT} />;
+        return <Arena characterNFT={characterNFT} setCharacterNFT={setCharacterNFT} currentAccount={currentAccount} />;
       }
 
     } else {

@@ -7,7 +7,7 @@ import LoadingIndicator from '../../components/LoadingIndicator/'
 import Toast from '../../components/Toast/'
 
 
-const Arena = ({ characterNFT, setCharacterNFT }) => {
+const Arena = ({ characterNFT, setCharacterNFT, currentAccount }) => {
   // State
   const [gameContract, setGameContract] = useState(null);
 

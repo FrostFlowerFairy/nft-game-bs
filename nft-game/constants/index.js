@@ -5,7 +5,7 @@ export const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 export const TWITTER_HANDLE_ZEE = 'zainamroti';
 export const TWITTER_LINK_ZEE = `https://twitter.com/${TWITTER_HANDLE_ZEE}`;
 
-export const CONTRACT_ADDRESS = '0x96f77B4E9215dbAA0039d41126F4177b3cA20d1e';
+export const CONTRACT_ADDRESS = '0xb560d25dD56875d1F2722F8da1df0918aed64A5D';
 export const CONTRACT_ABI = [
     {
         "inputs": [
@@ -683,10 +683,10 @@ export const CONTRACT_ABI = [
 
 export const transformCharacterData = (characterData) => {
     return {
-      name: characterData.name,
-      imageURI: characterData.imageURI,
-      hp: characterData.hp.toNumber(),
-      maxHp: characterData.maxHp.toNumber(),
-      attackDamage: characterData.attackDamage.toNumber(),
+        name: characterData.name,
+        imageURI: characterData.imageURI,
+        hp: characterData.hp.toNumber(),
+        maxHp: characterData.maxHp.toNumber(),
+        attackDamage: characterData.attackDamage.toNumber(),
     };
-  };
+};
