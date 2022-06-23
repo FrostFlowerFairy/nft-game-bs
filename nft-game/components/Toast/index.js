@@ -12,7 +12,7 @@ const Toast = ({ showToast, characterNFT, boss }) => {
 
 
     return (
-        <div id="toast" className={showToast ? `${styles.show}` : ''}>
+        <div id="toast" className={showToast ? `${styles.toast} ${styles.show}` : `${styles.toast}`}>
             <div id="desc">{`💥 ${boss.name} was hit for ${characterNFT.attackDamage}!`}</div>
         </div>
     )

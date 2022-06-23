@@ -117,7 +117,7 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
   return (
     <div className={styles.arenaContainer}>
 
-      {boss && characterNFT && (
+      {boss && characterNFT && showToast && (
         <Toast showToast={showToast} boss={boss} characterNFT={characterNFT} />
       )}
 
@@ -172,10 +172,10 @@ const Arena = ({ characterNFT, setCharacterNFT }) => {
             </div>
             <h2>Your Character</h2>
           </div>
-          <div className={styles.activePlayers}>
+          {/* <div className={styles.activePlayers}>
             <h2>Active Players</h2>
             <div className={styles.playersList}>{renderActivePlayersList()}</div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
